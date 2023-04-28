@@ -5,7 +5,7 @@ import streamlit as st
 
 
 # loading the saved model
-loaded_model = pickle.load(open('C:/Users/chanu/PycharmProjects/ASD/Autistic_Spectrum_Disorder.pkl', 'rb'))
+loaded_model = pickle.load(open('Autistic_Spectrum_Disorder.pkl', 'rb'))
 
 # "C:\Users\chanu\PycharmProjects\ASD\Autistic_Spectrum_Disorder.joblib"
 
