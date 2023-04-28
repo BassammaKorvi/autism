@@ -2,16 +2,10 @@ import numpy as np
 import pickle
 import streamlit as st
 
-
-
 # loading the saved model
-loaded_model = pickle.load(open('Autistic_Spectrum_Disorder.pkl', 'rb'))
-
-# "C:\Users\chanu\PycharmProjects\ASD\Autistic_Spectrum_Disorder.joblib"
-
+loaded_model = pickle.load(open('C:/Users/chanu/PycharmProjects/ASD/Autistic_Spectrum_Disorder.pkl', 'rb'))
 
 # creating a function for Prediction
-
 def asd_prediction(input_data):
     # changing the input_data to numpy array
     input_data_as_numpy_array = np.asarray(input_data)
@@ -22,9 +16,10 @@ def asd_prediction(input_data):
     prediction = loaded_model.predict(input_data_reshaped)
     return prediction
 
+
 def main():
     # giving a title
-    st.title('asd_prediction Web App')
+    st.title('Autism Spectrum Disorder Detection')
     # Define the options for the dropdown
     options = ["yes", "no"]
 
@@ -37,7 +32,9 @@ def main():
                            options)
     answer5 = st.selectbox("Does your child pretend? (e.g. care for dolls, talk on a toy phone)", options)
     answer6 = st.selectbox("Does your child follow where you’re looking?", options)
-    answer7 = st.selectbox("If you or someone else in the family is visibly upset, does your child show signs of wanting to comfort them? (e.g. stroking hair, hugging them)", options)
+    answer7 = st.selectbox(
+        "If you or someone else in the family is visibly upset, does your child show signs of wanting to comfort them? (e.g. stroking hair, hugging them)",
+        options)
     answer8 = st.selectbox("Would you describe your child’s first words as:", options)
     answer9 = st.selectbox("Does your child use simple gestures? (e.g. wave goodbye)", options)
     answer10 = st.selectbox("Does your child stare at nothing with no apparent purpose?", options)
@@ -72,59 +69,37 @@ def main():
     else:
         Age_Months = 0
 
-    # Age_Months = float(st.text_input('Age_Months'))
-
     sex_map = {"m": 1, "f": 0}
-    Sex = sex_map.get(st.text_input('Sex'), 0)
+    sex = st.selectbox('Sex', options=list(sex_map.keys()), index=0)
+    Sex = sex_map.get(sex, 0)
 
     ethnicity_map = {
-        "middle eastern": 0,
-        "White European": 1,
-        "Hispanic": 2,
-        "black": 3,
-        "asian": 4,
-        "south asian": 5,
-        "Native Indian": 6,
-        "Others": 7,
-        "Latino": 8,
+        "middle eastern": 8,
+        "White European": 5,
+        "Hispanic": 0,
+        "black": 7,
+        "asian": 6,
+        "south asian": 10,
+        "Native Indian": 2,
+        "Others": 3,
+        "Latino": 1,
         "mixed": 9,
-        "Pacifica": 10
+        "Pacifica": 4
     }
-    Ethnicity = ethnicity_map.get(st.text_input('Ethnicity'), 0)
+    ethnicity = st.selectbox('Ethnicity', options=list(ethnicity_map.keys()), index=0)
+    Ethnicity = ethnicity_map.get(ethnicity, 0)
 
     jaundice_map = {"yes": 1, "no": 0}
-    Jaundice = jaundice_map.get(st.text_input('Jaundice'), 0)
+    jaundice =st.selectbox('Jaundice', options=list(jaundice_map.keys()), index=0)
+    Jaundice = jaundice_map.get(jaundice, 0)
 
     family_map = {"yes": 1, "no": 0}
-    Family_Member_with_ASD = family_map.get(st.text_input('Family_Member_with_ASD'), 0)
+    family_Member_with_ASD =st.selectbox('Family_Member_with_ASD', options=list(family_map.keys()), index=0)
+    Family_Member_with_ASD = family_map.get(family_Member_with_ASD, 0)
 
     who_map = {"family member": 0, "Health Care Professional": 1, "self": 2, "others": 3}
-
-    # get the input value of Who_completed_the_test from the user and map it to the corresponding numeric value
-    Who_completed_the_test = 0
-    who_input = st.text_input('Who_completed_the_test')
-    if who_input:
-        Who_completed_the_test = who_map.get(who_input, 0)
-    else:
-        st.warning('Please enter a value for Who_completed_the_test')
-
-    # sex_map = {"m": 1, "f": 0}
-    # Sex = sex_map.get(st.text_input('Sex'), 0)
-    #
-    # Ethnicity = float(st.text_input('Ethnicity'))
-    #
-    # jaundice_map = {"yes": 1, "no": 0}
-    # Jaundice = jaundice_map.get(st.text_input('Jaundice'), 0)
-    #
-    # family_map = {"yes": 1, "no": 0}
-    # Family_Member_with_ASD = family_map.get(st.text_input('Family_Member_with_ASD'), 0)
-    #
-    #
-    # who_map = {"family member": 0, "Health Care Professional": 1, "self": 2, "others": 3}
-    #
-    # # get the input value of Who_completed_the_test from the user and map it to the corresponding numeric value
-    # Who_completed_the_test = who_map.get(st.text_input('Who_completed_the_test'), 0)
-
+    who = st.selectbox('Who Completed the Test', options=list(who_map.keys()), index=0)
+    Who_completed_the_test = who_map.get(who, 0)
 
     # code for Prediction
     asd__prediction = ' '
@@ -133,9 +108,11 @@ def main():
 
     if st.button('Prediction'):
         asd__prediction = asd_prediction(
-            [A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,Age_Months, Sex, Ethnicity, Jaundice,Family_Member_with_ASD, Who_completed_the_test])
+            [A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, Age_Months, Sex, Ethnicity, Jaundice, Family_Member_with_ASD,
+             Who_completed_the_test])
 
     st.success(asd__prediction)
+
 
 if __name__ == '__main__':
     main()
