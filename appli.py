@@ -111,7 +111,12 @@ def main():
             [A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, Age_Months, Sex, Ethnicity, Jaundice, Family_Member_with_ASD,
              Who_completed_the_test])
 
-    st.success(asd__prediction)
+        if (asd__prediction==0):
+            st.write("Autism Spectrum Disorder Is Absent")
+        if(asd__prediction==1):
+            st.write("Autism Spectrum Disorder Is Present")
+
+    # st.success(asd__prediction)
 
 
 if __name__ == '__main__':
