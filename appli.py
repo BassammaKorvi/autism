@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 
 # loading the saved model
-loaded_model = pickle.load(open('C:/Users/chanu/PycharmProjects/ASD/Autistic_Spectrum_Disorder.pkl', 'rb'))
+loaded_model = pickle.load(open('Autistic_Spectrum_Disorder.pkl', 'rb'))
 
 # creating a function for Prediction
 def asd_prediction(input_data):
