@@ -117,6 +117,7 @@ def main():
             st.write("Autism Spectrum Disorder Is Present")
 
     # st.success(asd__prediction)
+    st.write("Early intervention is crucial if you suspect developmental issues in your child, so seek professional evaluation and support as soon as possible.")
 
 
 if __name__ == '__main__':
